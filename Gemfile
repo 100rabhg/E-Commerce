@@ -51,6 +51,7 @@ gem "bootsnap", require: false
 
 gem "devise" 
 gem 'byebug'
+gem "letter_opener", group: :development
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -74,3 +75,6 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "activeadmin", "~> 2.13"
+gem 'sassc'
