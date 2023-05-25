@@ -22,11 +22,11 @@ ActiveAdmin.register User do
   filter :reset_password_token 
   filter :confirmation_token
   filter :unconfirmed_email
-  index do
-    column :name
-    column :email
-    column :last_sign_in_at
-    column :last_sign_in_ip
-    actions
-  end
+  # index do
+  #   column :name
+  #   column :email
+  #   column :last_sign_in_at
+  #   column :last_sign_in_ip
+  #   actions
+  # end
 end

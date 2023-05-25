@@ -1,0 +1,20 @@
+<h1>E-Commerce</h1>
+<% if user_signed_in? %> 
+ <h3> Welcome <%= current_user.email %> </h3>
+  <%= button_to "Log out", destroy_user_session_path, method: :delete %> 
+  <%if current_user.store%>
+  <%= button_to "Go To Store",store_path, method: :get %>
+  <%else%>
+  <%= button_to "Create Store",new_store_path, method: :get %>
+  <%end%>
+<% else %>
+  <%= button_to "Sign in", new_user_session_path, method: :get%> 
+  <%= button_to "Sign up", new_user_registration_path, method: :get %> 
+<% end %>
+
+
+<%= form_with url: search_path, method: :get do |form| %>
+  <%= form.label :query, "Search for:" %>
+  <%= form.text_field :query ,value: query %>
+  <%= form.submit "Search" %>
+<% end %>

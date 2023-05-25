@@ -1,0 +1,6 @@
+<%= render "header", query: @query%>
+<%if @products%>
+    <h2>No Result Found!!</h2>
+<%else%>
+<%= render "product", products: @products%>
+<%end%>

@@ -1,0 +1,8 @@
+<h1><%= @store.name %></h1>
+
+<p><%= @store.description %></p>
+
+<ul>
+  <li><%= link_to "Edit", edit_store_path%></li>
+  <li><%= link_to "Destroy", store_path ,data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></li>
+</ul>
