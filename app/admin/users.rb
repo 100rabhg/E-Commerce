@@ -1,5 +1,4 @@
 ActiveAdmin.register User do
-
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -19,7 +18,7 @@ ActiveAdmin.register User do
   #   permitted
   # end
   filter :encrypted_password
-  filter :reset_password_token 
+  filter :reset_password_token
   filter :confirmation_token
   filter :unconfirmed_email
   # index do

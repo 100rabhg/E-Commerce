@@ -3,10 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, :trackable
-  validates :name, presence: true, length: {minimum: 3}
-  has_one :store
+  validates :name, presence: true, length: { minimum: 3 }
+  has_one :store, dependent: :destroy
   has_many :order
-  has_many :cartItem
+  has_many :cartItem, dependent: :destroy
 
   after_create :send_welcome_mail
 

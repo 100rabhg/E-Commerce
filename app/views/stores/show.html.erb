@@ -1,8 +1,27 @@
-<h1><%= @store.name %></h1>
+<h1 style=" margin:10px;"><%= @store.name %></h1>
 
-<p><%= @store.description %></p>
+<p style=" margin:10px;" ><%= @store.description %></p>
 
-<ul>
+<ul style="list-style-type:none;">
   <li><%= link_to "Edit", edit_store_path%></li>
   <li><%= link_to "Destroy", store_path ,data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></li>
+</ul>
+
+<%= button_to "New Product", new_product_path, method: :get%> 
+
+<%if @store.product.empty?%>
+    <h2>No Result Found!!</h2>
+<%else%>
+
+  <ul style="list-style-type:none;">
+  <% @store.product.each do |product|%>
+    <li style="border: 1px solid black; padding: 20px; margin:10px;">
+    <h3 style="display:inline; margin-right:50px;"><%=product.title%></h3> 
+    <h4 style="display:inline"> Price: &#8377 <%=product.price%> </h4>
+    <h4 > Quantity :<%=product.quantity%> </h4>
+    <%= button_to "Edit", edit_product_path(product), method: :get %>
+    <%= button_to "Delete", product_path(product), method: :delete, data: { turbo_confirm: 'Are you sure?'} %>
+    </li>
+  <%end%>
+<%end%>
 </ul>

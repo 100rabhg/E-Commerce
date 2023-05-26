@@ -1,0 +1,40 @@
+
+<%= button_to "Home", root_path, method: :get%> 
+<h3> Welcome <%= current_user.email %> </h3>
+<h2> Cart </h2>
+
+<%if @cartItems.empty?%>
+    <h2>Your cart is empty!!</h2>
+<%else%>
+
+  <ul style="list-style-type:none;">
+  <% @cartItems.each do |item|%>
+    <li style="border: 1px solid black; padding: 20px; margin:10px;">
+    <h3 style="display:inline; margin-right:50px;"><%=item.product.title%></h3> 
+    <h4 style="display:inline"> Price: &#8377 <%=item.sub_total%> </h4>
+    <div style="display:inline;">
+    <%= form_with url:cart_path(item), method: :put do |form| %>
+        <div>
+            <%= form.hidden_field :quantity, value: item.quantity-1%>
+        </div>
+        <div>
+            <%= form.submit "-" %>
+        </div>
+    <% end %>
+    <h4> Quantity :<%=item.quantity%> </h4>
+    <%= form_with url:cart_path(item), method: :put do |form| %>
+        <div>
+            <%= form.hidden_field :quantity, value: item.quantity+1%>
+        </div>
+        <div>
+            <%= form.submit "+" %>
+        </div>
+    <% end %>
+    </div>
+    <%= button_to "Remove", cart_path(item), method: :delete%>
+    </li>
+  <%end%>
+<%end%>
+</ul>
+
+<h4>Total Price: <%=@cartItems.pluck(:sub_total).inject(:+)%></h4>

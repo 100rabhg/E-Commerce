@@ -1,10 +1,10 @@
 class Order < ApplicationRecord
   belongs_to :user
-  has_many :orderItem
-  has_many :product , through: :orderItem
-  validates :total_price, presence: true, numericality: {minmum: 1}
+  has_many :orderItem, dependent: :destroy
+  has_many :product, through: :orderItem
+  validates :total_price, presence: true, numericality: { minmum: 1 }
   validates :purchase_date, presence: true
-  enum :status, [:received, :packed, :shipped, :delivered, :cancelled]
+  enum :status, %i[received packed shipped delivered cancelled]
 
   before_validation :incialize_status_and_orderdate, on: :create
 
@@ -16,6 +16,6 @@ class Order < ApplicationRecord
   after_save :send_status_mail
 
   def send_status_mail
-      OrderMailer.send_status_mail(self).deliver_later
+    OrderMailer.send_status_mail(self).deliver_later
   end
 end

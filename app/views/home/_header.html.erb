@@ -1,6 +1,8 @@
 <h1>E-Commerce</h1>
 <% if user_signed_in? %> 
  <h3> Welcome <%= current_user.email %> </h3>
+ <%= button_to "Home", root_path, method: :get%> 
+ <%= button_to "Cart", cart_index_path, method: :get%> 
   <%= button_to "Log out", destroy_user_session_path, method: :delete %> 
   <%if current_user.store%>
   <%= button_to "Go To Store",store_path, method: :get %>

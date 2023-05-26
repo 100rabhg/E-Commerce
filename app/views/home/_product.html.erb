@@ -2,6 +2,15 @@
 <% products.each do |product|%>
   <li style="border: 1px solid black; padding: 20px; margin:10px;">
   <%= link_to(render("productview",product: product), home_path(product))%>
+   <%= form_with url:cart_index_path do |form| %>
+        <div>
+            <%= form.hidden_field :product_id, value: product.id%>
+        </div>
+        <div>
+            <%= form.submit "Add to Cart" %>
+        </div>
+    <% end %>
+  <%= button_to "Buy Now", new_user_session_path, method: :get %>
   </li>
 <%end%>
 </ul>

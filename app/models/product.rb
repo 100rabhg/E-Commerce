@@ -4,8 +4,8 @@ class Product < ApplicationRecord
   has_many :orderItem
   has_many :order, through: :orderItem
 
-  validates :title, presence: true, length:{minimum: 3, maximum: 20}
-  validates :description, length: {maximum: 1000}
-  validates :price, presence: true, numericality: {minimum: 1}
-  validates :quantity, presence: true, numericality: {only_integer: true, minimum: 0}
+  validates :title, presence: true, length: { minimum: 3, maximum: 20 }
+  validates :description, length: { maximum: 1000 }
+  validates :price, presence: true, numericality: { minimum: 1 }
+  validates :quantity, presence: true, numericality: { only_integer: true, minimum: 0 }
 end
