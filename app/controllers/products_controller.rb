@@ -45,5 +45,4 @@ class ProductsController < ApplicationController
 
     redirect_to new_store_path
   end
-  
 end

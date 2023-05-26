@@ -7,7 +7,8 @@ class HomeController < ApplicationController
     @query = params[:query]
     sanitize_query = "%#{Product.sanitize_sql_like(@query)}%"
     @products = Product.joins(:category).where('categories.title like ? ', sanitize_query)
-    .or(Product.where('products.title like ?',sanitize_query).or(Product.where('description LIKE ?', sanitize_query)))
+                       .or(Product.where('products.title like ?',
+                                         sanitize_query).or(Product.where('description LIKE ?', sanitize_query)))
   end
 
   def show

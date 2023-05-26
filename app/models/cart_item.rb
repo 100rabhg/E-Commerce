@@ -12,9 +12,8 @@ class CartItem < ApplicationRecord
   def set_sub_total
     self.sub_total = product.price * quantity
   end
-  
-  def set_quantity
-    self.quantity = 1 if self.quantity.nil?
-  end
 
+  def set_quantity
+    self.quantity = 1 if quantity.nil?
+  end
 end

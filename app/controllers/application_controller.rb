@@ -11,13 +11,12 @@ class ApplicationController < ActionController::Base
   private
 
   def required_login?
-    params[:controller] != 'home' && !devise_controller? && !params[:controller].match?("active_admin/.*") && !params[:controller].match?("admin/.*")
+    params[:controller] != 'home' && !devise_controller? && !params[:controller].match?('active_admin/.*') && !params[:controller].match?('admin/.*')
   end
 
   def check_user_is_login
-
     return if user_signed_in?
+
     redirect_to new_user_session_path
-    
   end
 end
