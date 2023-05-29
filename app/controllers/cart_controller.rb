@@ -1,4 +1,5 @@
 class CartController < ApplicationController
+  
   def index
     @cartItems = current_user.cartItem
   end
@@ -20,6 +21,28 @@ class CartController < ApplicationController
   def destroy
     current_user.cartItem.find(params[:id]).destroy
     redirect_to cart_index_path, status: :see_other
+  end
+
+  def order
+    items  = current_user.cartItem
+    total_sum = items.pluck(:sub_total).inject(:+)
+    @order = Order.new(total_price:total_sum, user:current_user)
+
+    if @order.save!
+      items.each do |item|
+        orderitem = OrderItem.new(product_id:item.product_id, order:@order, quantity:item.quantity)
+        unless orderitem.save
+          @order.destory
+          return redirect_to root_path, status: :unprocessable_entity
+        end
+        items.each{ |item|
+          item.destroy
+        }
+        return redirect_to order_path(@order)
+      end
+    else
+      redirect_to root_path,  status: :unprocessable_entity
+    end
   end
 
   private

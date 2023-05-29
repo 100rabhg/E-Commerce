@@ -1,0 +1,23 @@
+<div style="text-align: center;">
+<h2>Your Orders</h2>
+<table>
+    <tr>
+        <th>Order status</th>
+        <th>Order date</th>
+        <th>Total Price</th>
+        <th>Order Item</th>
+        <th>Actions</th>
+
+    </tr>
+    <%@orders.each do |order|%>
+    <tr>
+        <td><%=order.status%></td>
+        <td><%=order.purchase_date%></td>
+        <td><%=order.total_price%></td>
+        <td><%=order.orderItem.count%></td>
+        <td><%= link_to "View", order_path(order)%> 
+        <%= link_to "Cancel", order_path(order),data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} unless order.cancelled?%></td>
+    </tr>
+    <%end%>
+</table>
+</div>

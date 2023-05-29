@@ -1,22 +1,32 @@
-<h1>E-Commerce</h1>
+<table>
+<tr>
+<th>
+<h1>E-Commerce</h1></th>
 <% if user_signed_in? %> 
- <h3> Welcome <%= current_user.email %> </h3>
- <%= button_to "Home", root_path, method: :get%> 
- <%= button_to "Cart", cart_index_path, method: :get%> 
-  <%= button_to "Log out", destroy_user_session_path, method: :delete %> 
+ <th><h3> Welcome <%= current_user.email %> </h3></th>
+ <th><%= button_to "Home", root_path, method: :get%> </th>
+ <th><%= button_to "Cart", cart_index_path, method: :get%></th>
+ <th><%= button_to "Your Orders", orders_path, method: :get%></th>
+ 
+  <th><%= button_to "Log out", destroy_user_session_path, method: :delete %> </th>
   <%if current_user.store%>
-  <%= button_to "Go To Store",store_path, method: :get %>
+  <th><%= button_to "Go To Store",store_path, method: :get %></th>
   <%else%>
-  <%= button_to "Create Store",new_store_path, method: :get %>
+  <th><%= button_to "Create Store",new_store_path, method: :get %></th>
   <%end%>
 <% else %>
-  <%= button_to "Sign in", new_user_session_path, method: :get%> 
-  <%= button_to "Sign up", new_user_registration_path, method: :get %> 
+   <th><%= button_to "Sign in", new_user_session_path, method: :get%> </th>
+   <th><%= button_to "Sign up", new_user_registration_path, method: :get %> </th>
 <% end %>
+</tr>
 
-
+<tr>
+<td colspan="10">
 <%= form_with url: search_path, method: :get do |form| %>
   <%= form.label :query, "Search for:" %>
   <%= form.text_field :query ,value: query %>
   <%= form.submit "Search" %>
 <% end %>
+</td>
+</tr>
+</table>

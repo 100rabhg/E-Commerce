@@ -1,5 +1,6 @@
-<h3 style="display:inline; margin-right:50px;"><%=product.title%></h3> <h4 style="display:inline"> Price: &#8377 <%=product.price%> </h4>
+<h3 style="display:inline; margin-right:50px;">
+<%=image_tag product.image%> 
+<%=product.title%></h3> <h4 style="display:inline"> Price: &#8377 <%=product.price%> </h4>
   <% if product.quantity == 0 %>
     <p style="color:red">Out Of Stock<p>
-  <%end%>
-  <!-- TODO update link path correctly-->
+<%end%>

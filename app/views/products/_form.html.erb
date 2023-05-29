@@ -1,5 +1,5 @@
 <%= form_with model: @product do |form| %>
-  <div>
+  <div class="field">
     <%= form.label :title %><br>
     <%= form.text_field :title %>
     <% @product.errors.full_messages_for(:title).each do |message| %>
@@ -7,7 +7,7 @@
     <% end %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :description %><br>
     <%= form.text_area :description %><br>
     <% @product.errors.full_messages_for(:description).each do |message| %>
@@ -15,7 +15,7 @@
     <% end %>
   </div>
 
-  <div>
+  <div class="field" >
     <%= form.label :price %><br>
     <%= form.number_field :price %><br>
     <% @product.errors.full_messages_for(:price).each do |message| %>
@@ -23,7 +23,7 @@
     <% end %>
   </div>
 
-  <div>
+  <div class="field">
     <%= form.label :quantity %><br>
     <%= form.number_field :quantity %><br>
     <% @product.errors.full_messages_for(:quantity).each do |message| %>
@@ -31,7 +31,7 @@
     <% end %>
   </div>
 
-  <div>
+  <div class="field">
     <% if params[:action] == "new" %>
      <%= form.select :category_id, Category.pluck(:title,:id) %><br>
     <%else%>
@@ -42,7 +42,13 @@
     <% end %>
   </div>
 
+  <div class="field">
+    <%=form.label :image %>
+    <%=form.file_field :image %>
+  </div>
+
   <div>
     <%= form.submit %>
   </div>
+  
 <% end %>

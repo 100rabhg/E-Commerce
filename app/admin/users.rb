@@ -4,7 +4,7 @@ ActiveAdmin.register User do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :name, :email
+  permit_params :name, :email
   # index do
   #   column :name
   #   column :email
@@ -21,11 +21,21 @@ ActiveAdmin.register User do
   filter :reset_password_token
   filter :confirmation_token
   filter :unconfirmed_email
-  # index do
-  #   column :name
-  #   column :email
-  #   column :last_sign_in_at
-  #   column :last_sign_in_ip
-  #   actions
-  # end
+
+  index do
+    selectable_column
+    id_column
+    column :email
+    column :current_sign_in_at
+    column :sign_in_count
+    column :current_sign_in_at
+    column :last_sign_in_at
+    column :current_sign_in_ip
+    column :lastsign_in_ip
+    column :confirmed_at
+    column :confirmation_sent_at
+    column :unconfirmed_email
+    column :created_at
+    actions
+  end
 end
