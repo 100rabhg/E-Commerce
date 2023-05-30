@@ -5,24 +5,10 @@
   <table>
   <tr>
   <td>
-   <%= form_with url:cart_index_path do |form| %>
-        <div>
-            <%= form.hidden_field :product_id, value: product.id%>
-        </div>
-        <div>
-            <%= form.submit "Add to Cart" %>
-        </div>
-    <% end %>
+   <%= button_to "Add to Cart", cart_index_path, params: {product_id:product}, method: :post%>
  </td>
  <td>
-  <%= form_with url:orders_path do |form| %>
-        <div>
-            <%= form.hidden_field :product_id, value: [product.id]%>
-        </div>
-        <div>
-            <%= form.submit "Buy now" %>
-        </div>
-    <% end %>
+ <%= button_to "Buy now", new_order_path, params: {product_id:product}, method: :get%>
     </td>
     </tr>
     </table>

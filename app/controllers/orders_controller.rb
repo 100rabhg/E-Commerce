@@ -9,13 +9,17 @@ class OrdersController < ApplicationController
       @orderItems = @order.orderItem
   end
 
-  def create
-    # byebug
-    total_sum = Product.find(params[:product_id]).price
-    @order  = Order.new(total_price:total_sum,user: current_user)
+  def new
+    Product.find(params[:product_id])
+    @order =  Order.new
+    @product_id = params[:product_id]
+  end
 
+  def create
+    total_sum = Product.find(params[:order][:product_id]).price
+    @order  = Order.new(order_params.merge(total_price:total_sum, user:current_user))
     if @order.save
-        unless OrderItem.create(product_id:params[:product_id], order: @order)
+        unless OrderItem.create(product_id:params[:order][:product_id], order: @order)
             @order.destroy
             redirect_to root_path, status: :unprocessable_entity
         end
@@ -32,4 +36,8 @@ class OrdersController < ApplicationController
       redirect_to orders_path
   end
 
+  private
+  def order_params
+    params.require(:order).permit(:mobile_number, :address, :pincode,:state, )
+  end
 end

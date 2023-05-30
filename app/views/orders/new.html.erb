@@ -1,0 +1,31 @@
+<h1> Delivery Address</h1>
+<%= form_with model:@order do |form| %>
+
+  <div>
+    <%= form.hidden_field :product_id, value: @product_id%>
+  </div>
+
+  <div>
+    <%= form.label :Mobile_Number %><br>
+    <%= form.telephone_field :mobile_number %>
+  </div>
+
+  <div>
+    <%= form.label :Address %><br>
+    <%= form.text_area :address %><br>
+  </div>
+
+  <div>
+    <%= form.label :Pincode %><br>
+    <%= form.text_area :pincode %><br>
+  </div>
+
+  <div>
+    <%= form.label :state %><br>
+    <%= form.text_area :state %><br>
+  </div>
+
+  <div>
+    <%= form.submit "Deliver Here"%>
+  </div>
+<% end %>

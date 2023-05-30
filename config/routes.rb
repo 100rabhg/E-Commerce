@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root 'home#index'
 
   devise_for :users
@@ -8,8 +9,8 @@ Rails.application.routes.draw do
   get '/search', to: 'home#search'
   resource :store
   resources :products, except: %i[index show]
-  resources :cart, except: %i[show new edit] do 
+  resources :cart, except: %i[show new edit] do
     post 'order', on: :collection
   end
-  resources :orders, except: %i[new edit update]
+  resources :orders, except: %i[edit update]
 end

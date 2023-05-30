@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :order
   has_many :cartItem, dependent: :destroy
 
+  enum :role, %i[merchant customer]
+
   after_create :send_welcome_mail
 
   def send_welcome_mail

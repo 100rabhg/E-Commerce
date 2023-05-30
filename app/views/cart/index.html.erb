@@ -25,25 +25,11 @@
     <table>
     <tr>
     <th>
-    <%= form_with url:cart_path(item), method: :put do |form| %>
-        <div>
-            <%= form.hidden_field :quantity, value: item.quantity-1%>
-        </div>
-        <div>
-            <%= form.submit "-" %>
-        </div>
-    <% end %>
+    <%= button_to "-", cart_path(item), params: {quantity:item.quantity-1}, method: :put%>
     </th>
     <th><h4> Quantity :<%=item.quantity%> </h4> </th>
     <th>
-    <%= form_with url:cart_path(item), method: :put do |form| %>
-        <div>
-            <%= form.hidden_field :quantity, value: item.quantity+1%>
-        </div>
-        <div>
-            <%= form.submit "+" %>
-        </div>
-    <% end %>
+    <%= button_to "+", cart_path(item), params: {quantity:item.quantity+1}, method: :put%>
     </th>
     </table>
     </div>
