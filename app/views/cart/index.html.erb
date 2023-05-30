@@ -3,6 +3,7 @@
 <th><h2> Cart </h2></th>
 <th><h3> Welcome <%= current_user.email %> </h3></th>
 <th><%= button_to "Home", root_path, method: :get%> </th>
+<th><%= button_to "Your Order", orders_path, method: :get%> </th>
 </tr>
 </table>
 <%if @cartItems.empty?%>
@@ -12,8 +13,14 @@
   <ul style="list-style-type:none;">
   <% @cartItems.each do |item|%>
     <li style="border: 1px solid black; padding: 20px; margin:10px;">
-    <h3 style="display:inline; margin-right:50px;"><%=item.product.title%></h3> 
-    <h4 style="display:inline"> Price: &#8377 <%=item.sub_total%> </h4>
+    <table>
+    <tr>
+    <th rowspan="3"><%=image_tag item.product.image, size:"350"%></th>
+    <th><h3 style="display:inline; margin-right:50px;"><%=item.product.title%></h3></th>
+    <th><h4 style="display:inline"> Price: &#8377 <%=item.sub_total%> </h4></th>
+    </tr>
+    <tr>
+    <td>
     <div style="display:inline;">
     <table>
     <tr>
@@ -40,7 +47,14 @@
     </th>
     </table>
     </div>
+    </td>
+    </tr>
+    <tr>
+    <td>
     <%= button_to "Remove", cart_path(item), method: :delete%>
+    </td>
+    </tr>
+    </table>
     </li>
   <%end%>
   <h4>Total Price: <%=@cartItems.pluck(:sub_total).inject(:+)%></h4>

@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+
   def index
     @products = Product.where(quantity: (1..)).order(updated_at: :desc).limit(20)
   end

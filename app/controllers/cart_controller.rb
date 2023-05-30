@@ -1,5 +1,6 @@
 class CartController < ApplicationController
-  
+  before_action :authenticate_user!
+
   def index
     @cartItems = current_user.cartItem
   end
@@ -35,11 +36,9 @@ class CartController < ApplicationController
           @order.destory
           return redirect_to root_path, status: :unprocessable_entity
         end
-        items.each{ |item|
-          item.destroy
-        }
-        return redirect_to order_path(@order)
+        item.destroy
       end
+      return redirect_to order_path(@order)
     else
       redirect_to root_path,  status: :unprocessable_entity
     end

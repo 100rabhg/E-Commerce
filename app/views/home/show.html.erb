@@ -1,13 +1,37 @@
 <%= render "header", query: ""%>
-
-
-<h2 style="display:inline; margin-right:50px;"><%=@product.title%></h2>
- <h3 style="display:inline"> Price: &#8377 <%=@product.price%> </h3>
-  <% if @product.quantity == 0 %>
-    <h4 style="color:red">Out Of Stock<h4>
-  <%end%>
-  <h2>
-  <%=@product.description%>
-  </h2>
-  <%= button_to "Add to Cart", new_user_session_path, method: :get %>
-  <%= button_to "Buy Now", new_user_session_path, method: :get %>
+<div>
+<table>
+<tr>
+<td rowspan="4">
+<%=image_tag @product.image%>
+</td>
+<td>
+<h2><%=@product.title%></h2>
+</td>
+<td>
+<h3> Price: &#8377 <%=@product.price%> </h3>
+</td>
+</tr>
+<tr>
+<td>
+<% if @product.quantity == 0 %>
+  <h4 style="color:red">Out Of Stock<h4>
+<%end%>
+</td>
+</tr>
+<tr>
+<td>
+<p>
+<%=@product.description%>
+</td>
+</tr>
+</p>
+<tr>
+<td>
+<%= button_to "Add to Cart", new_user_session_path, method: :get %>
+</td>
+<td>
+<%= button_to "Buy Now", new_user_session_path, method: :get %>
+</td>
+</tr>
+</div>

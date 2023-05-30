@@ -49,7 +49,7 @@ gem 'bootsnap', require: false
 # gem "image_processing", "~> 1.2"
 
 gem 'byebug'
-gem 'cancan'
+gem 'cancancan'
 gem 'devise'
 gem 'letter_opener', group: :development
 

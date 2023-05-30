@@ -1,0 +1,9 @@
+<table>
+<tr>
+<th>
+<h1>E-Commerce</h1></th>
+ <th><h3> Welcome <%= current_user.email %> </h3></th>
+ <th><%= button_to "Home", root_path, method: :get%> </th>
+ <th><%= button_to "Cart", cart_index_path, method: :get%></th>
+</tr>
+</table>

@@ -1,6 +1,17 @@
-<h3 style="display:inline; margin-right:50px;">
-<%=image_tag product.image%> 
-<%=product.title%></h3> <h4 style="display:inline"> Price: &#8377 <%=product.price%> </h4>
+<table>
+<tr>
+<td rowspan="2">
+<%=image_tag product.image , size:"200"%>
+</td>
+<td>
+<h3><%=product.title%></h3><h4 style="display:inline"> Price: &#8377 <%=product.price%> </h4>
+</td>
+</tr>
+<tr>
+<td>
   <% if product.quantity == 0 %>
     <p style="color:red">Out Of Stock<p>
 <%end%>
+</td>
+</tr>
+</table>
