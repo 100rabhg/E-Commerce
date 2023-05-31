@@ -4,12 +4,14 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    authorize! :manage, @product
   end
 
   def create
     param = product_params
     param[:store_id] = current_user.store.id
     @product = Product.new(param)
+    authorize! :manage, @product
     if @product.save
       redirect_to store_path
     else
@@ -19,10 +21,12 @@ class ProductsController < ApplicationController
 
   def edit
     @product = current_user.store.product.find(params[:id])
+    authorize! :manage, @product
   end
 
   def update
     @product = current_user.store.product.find(params[:id])
+    authorize! :manage, @product
     if @product.update(product_params)
       redirect_to store_path
     else
@@ -31,7 +35,9 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    current_user.store.product.find(params[:id]).destroy
+    product = current_user.store.product.find(params[:id])
+    authorize! :manage, product
+    product.destroy
     redirect_to store_path, status: :see_other
   end
 

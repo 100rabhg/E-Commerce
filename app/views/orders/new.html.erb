@@ -1,9 +1,30 @@
+<%if @method.nil?%>
+<%product = Product.find(@product_id)%>
+  <h4><%=product.title%> </h4>
+  <h3> Total Price :<%=product.price * @quantity%> </h3>
+  <table>
+      <tr>
+      <th style="visibility: hidden;">
+      <%= button_to "-", new_order_path, params: {quantity:@quantity-1, product_id: @product_id}, method: :get%>
+      </th>
+      <th>
+      <%= button_to "-", new_order_path, params: {quantity:@quantity-1, product_id: @product_id}, method: :get%>
+      </th>
+      <th><h4> Quantity :<%=@quantity%> </h4></th>
+      <th>
+      <%= button_to "+", new_order_path, params: {quantity:@quantity+1, product_id: @product_id}, method: :get%>
+      </th>
+  </table>
+<% end %>
 <h1> Delivery Address</h1>
-<%= form_with model:@order do |form| %>
+<% url = @method.nil? ? orders_path : order_cart_index_path %>
+ <%= form_with model:@order, url:url do |form|%>
 
-  <div>
+  <%if @method.nil?%>
     <%= form.hidden_field :product_id, value: @product_id%>
-  </div>
+  <% else %>
+    <%= form.hidden_field :method, value: :cart%>
+  <% end %>
 
   <div>
     <%= form.label :Mobile_Number %><br>
@@ -26,6 +47,12 @@
   </div>
 
   <div>
-    <%= form.submit "Deliver Here"%>
+    <%= form.label :Payment_Method %><br>
+    <%= form.select :payment, ['COD', 'card', 'upi']%><br>
   </div>
+
+  <div>
+    <%= form.submit "Pay Now"%>
+  </div>
+
 <% end %>

@@ -1,0 +1,31 @@
+<div style="text-align: center;">
+<h2>Your Orders</h2>
+<table>
+    <thead>
+        <th>Item</th>
+        <th>Order status</th>
+        <th>Order date</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+        <th>Actions</th>
+    </thead>
+    <%@orderItem.each do |item|%>
+    <tr>
+        <td><%=item.product.title%></td>
+        <td><%=item.order.status%></td>
+        <td><%=item.order.purchase_date%></td>
+        <td><%=item.quantity%></td>
+        <td><%=item.sub_total%></td>
+        <td>
+        <%if item.order.received?%>
+        <%= button_to "Packed", order_path(item.order), method: :put,params:{order:{status: :packed}}%>
+        <%elsif item.order.packed?%>
+        <%=button_to "Shipped", order_path(item.order), method: :put,params:{order:{status: :shipped}}%>
+        <%elsif item.order.shipped?%>
+        <%= button_to "Delivered", order_path(item.order), method: :put, params:{order:{status: :delivered}}%>
+        <%end%>
+        </td>
+    </tr>
+    <%end%>
+</table>
+</div>

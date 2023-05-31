@@ -44,6 +44,6 @@
     </li>
   <%end%>
   <h4>Total Price: <%=@cartItems.pluck(:sub_total).inject(:+)%></h4>
-  <%= button_to "Buy now ", order_cart_index_path, method: :post%>
+  <%= button_to "Buy now", new_order_path, params: {method: :cart}, method: :get%>
 <%end%>
 </ul>

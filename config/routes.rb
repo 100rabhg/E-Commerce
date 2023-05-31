@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root 'home#index'
 
   devise_for :users
@@ -7,10 +6,10 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   resources :home, only: %i[index show]
   get '/search', to: 'home#search'
-  resource :store
+  resource :store, except: %i[destory]
   resources :products, except: %i[index show]
   resources :cart, except: %i[show new edit] do
     post 'order', on: :collection
   end
-  resources :orders, except: %i[edit update]
+  resources :orders, except: %i[edit]
 end

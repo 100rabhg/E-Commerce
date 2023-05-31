@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
-
   def index
+    return redirect_to store_path if !current_user.nil? && current_user.merchant?
+
     @products = Product.where(quantity: (1..)).order(updated_at: :desc).limit(20)
   end
 

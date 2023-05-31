@@ -9,17 +9,11 @@
  <th><%= button_to "Your Orders", orders_path, method: :get%></th>
  
   <th><%= button_to "Log out", destroy_user_session_path, method: :delete %> </th>
-  <%if current_user.store%>
-  <th><%= button_to "Go To Store",store_path, method: :get %></th>
-  <%else%>
-  <th><%= button_to "Create Store",new_store_path, method: :get %></th>
-  <%end%>
 <% else %>
    <th><%= button_to "Sign in", new_user_session_path, method: :get%> </th>
    <th><%= button_to "Sign up", new_user_registration_path, method: :get %> </th>
 <% end %>
 </tr>
-
 <tr>
 <td colspan="10">
 <%= form_with url: search_path, method: :get do |form| %>

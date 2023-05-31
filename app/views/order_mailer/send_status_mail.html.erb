@@ -13,11 +13,9 @@
 <p><%=orderItem.product.title%>: <%=orderItem.quatity%></p>
 <%end%>
 <%end%>
-<%
-=begin%>
- <p> <%= link_to "Click here to View Order detail"%> </p> 
-<%
-=end%>
+
+<p> <%= link_to "Click here to View Order detail", @order %> </p> 
+
 
 <h3>Regards,</h3>
 <h3>E-Commerce</h3>

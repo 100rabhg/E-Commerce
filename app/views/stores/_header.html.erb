@@ -1,0 +1,9 @@
+<table>
+<tr>
+<th><h3> Welcome <%= current_user.email %> </h3></th>
+ <th><%= button_to "View Order", orders_path, method: :get%> </th>
+ <th><%= button_to "Add Product", new_product_path, method: :get%></th>
+ <th><%= button_to "Edit Store", edit_store_path, method: :get%></th>
+ <th><%= button_to "Log out", destroy_user_session_path, method: :delete %> </th>
+</tr>
+</table>

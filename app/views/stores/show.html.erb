@@ -1,13 +1,8 @@
+<%= render "header"%>
+
 <h1 style=" margin:10px;"><%= @store.name %></h1>
 
 <p style=" margin:10px;" ><%= @store.description %></p>
-
-<ul style="list-style-type:none;">
-  <li><%= link_to "Edit", edit_store_path%></li>
-  <li><%= link_to "Destroy", store_path ,data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %></li>
-</ul>
-
-<%= button_to "New Product", new_product_path, method: :get%> 
 
 <%if @store.product.empty?%>
     <h2>No Product!!<h2>
