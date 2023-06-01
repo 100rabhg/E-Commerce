@@ -4,38 +4,31 @@
 
 <p style=" margin:10px;" ><%= @store.description %></p>
 
-<%if @store.product.empty?%>
+<%if @store.products.empty?%>
     <h2>No Product!!<h2>
 <%else%>
-
   <ul style="list-style-type:none;">
-  <% @store.product.each do |product|%>
-    <li style="border: 1px solid black; padding: 20px; margin:10px;">
-    <table>
-    <tr>
-    <td rowspan="3">
-    <%=image_tag product.image, size:"200",crop: :fill %>
-    </td>
-    <td>
-    <h3 style="display:inline; margin-right:50px;"><%=product.title%></h3> 
-    <h4 style="display:inline"> Price: &#8377 <%=product.price%> </h4>
-    </td>
-    </tr>
-    <tr>
-    <td>
-    <h4 > Quantity :<%=product.quantity%> </h4>
-    </td>
-    </tr>
-    <tr>
-    <td>
-    <%= button_to "Edit", edit_product_path(product), method: :get %>
-    </td>
-    <td>
-    <%= button_to "Delete", product_path(product), method: :delete, data: { turbo_confirm: 'Are you sure?'} %>
-    </td>
-    </tr>
-    </table>
-    </li>
-  <%end%>
+    <% @store.products.each do |product|%>
+      <li style="border: 1px solid black; padding: 20px; margin:10px;">
+        <table>
+          <tr>
+            <td rowspan="3">
+              <%=image_tag product.image, size:"200",crop: :fill %>
+            </td>
+            <td>
+              <h3 style="display:inline; margin-right:50px;"><%=product.title%></h3> 
+              <h4 style="display:inline"> Price: &#8377 <%=product.price%> </h4>
+            </td>
+          </tr>
+          <tr>
+            <td><h4 > Quantity :<%=product.quantity%> </h4></td>
+          </tr>
+          <tr>
+            <td><%= button_to "Edit", edit_product_path(product), method: :get %></td>
+            <td><%= button_to "Delete", product_path(product), method: :delete, data: { turbo_confirm: 'Are you sure?'} %></td>
+          </tr>
+        </table>
+      </li>
+    <%end%>
+  </ul>
 <%end%>
-</ul>

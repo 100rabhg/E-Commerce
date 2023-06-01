@@ -8,7 +8,7 @@ ActiveAdmin.register_page 'Dashboard' do
       column do
         panel "Order in a week: #{Order.where(created_at: (Time.now - 7.days..)).count}" do
           ul do
-            Order.joins(product: :category).group('categories.title').count.map do |title, count|
+            Order.joins(products: :category).group('categories.title').count.map do |title, count|
               li("#{title} : #{count}")
             end
           end
@@ -19,7 +19,7 @@ ActiveAdmin.register_page 'Dashboard' do
         panel "Total Store: #{Store.count}" do
           ul do
             Store.limit(100).map do |store|
-              li("#{store.name} : #{store.product.count}")
+              li("#{store.name} : #{store.products.count}")
             end
           end
         end

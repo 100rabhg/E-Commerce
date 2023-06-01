@@ -2,17 +2,14 @@ class StoresController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_user_have_not_store, only: %i[new create]
   before_action :ensure_user_have_store, only: %i[destory edit update show]
-  load_and_authorize_resource
+  before_action :inc_store, only: %i[show edit update]
 
   def new
     @store = Store.new
     authorize! :manage, @store
   end
 
-  def show
-    @store = current_user.store
-    authorize! :manage, @store
-  end
+  def show; end
 
   def create
     @store = Store.new(store_params)
@@ -24,14 +21,9 @@ class StoresController < ApplicationController
     end
   end
 
-  def edit
-    @store = current_user.store
-    authorize! :manage, @store
-  end
+  def edit; end
 
   def update
-    @store = current_user.store
-    authorize! :manage, @store
     if @store.update(store_params)
       redirect_to store_path
     else
@@ -40,6 +32,11 @@ class StoresController < ApplicationController
   end
 
   private
+
+  def inc_store
+    @store = current_user.store
+    authorize! :manage, @store
+  end
 
   def ensure_user_have_not_store
     return unless current_user.store

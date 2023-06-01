@@ -1,51 +1,48 @@
 class CartController < ApplicationController
+  include OrderMethod
+
   before_action :authenticate_user!
 
   def index
     # byebug
-    @cartItems = current_user.cartItem
+    @cartItems = current_user.cartItems
     return unless @cartItems.instance_of?(CartItem)
 
     authorize! :manage, @cartItems
   end
 
   def create
-    @item = CartItem.new(cart_params)
-    authorize! :manage, @item
-    @item.save if CartItem.where(user_id: current_user.id, product_id: params[:product_id]).count.zero?
+    @cartItem = CartItem.new(cart_params)
+    authorize! :manage, @cartItem
+    @cartItem.save if product_not_in_cart?
     redirect_to cart_index_path
   end
 
   def update
-    @item = current_user.cartItem.find(params[:id])
-    authorize! :manage, @item
-    if @item.product.quantity >= params[:quantity].to_i && params[:quantity].to_i.positive?
-      @item.update(update_quantity)
+    @cartItem = CartItem.find(params[:id])
+    authorize! :manage, @cartItem
+    if @cartItem.product.quantity >= params[:quantity].to_i && params[:quantity].to_i.positive?
+      @cartItem.update(update_quantity)
     end
     redirect_to cart_index_path
   end
 
   def destroy
-    @cartItem = current_user.cartItem.find(params[:id])
-    authorize! :manage, cartItem
+    @cartItem = CartItem.find(params[:id])
+    authorize! :manage, @cartItem
     @cartItem.destroy
     redirect_to cart_index_path, status: :see_other
   end
 
   def order
-    items = current_user.cartItem
-    total_sum = items.pluck(:sub_total).inject(:+)
-    @order = Order.new(order_params.merge(total_price: total_sum, user: current_user))
-    authorize! :manage, @order
+    cartItems = current_user.cartItems
+    @total_sum = cartItems.pluck(:sub_total).inject(:+)
+    order_now(params)
     if @order.save
-      items.each do |item|
-        orderitem = OrderItem.new(product_id: item.product_id, order: @order, quantity: item.quantity)
-        unless orderitem.save
-          @order.destory
-          return redirect_to root_path, status: :unprocessable_entity
-        end
-        OrderMailer.send_order_receive_mail(orderitem).deliver_now
-        item.destroy
+      cartItems.each do |cartItem|
+        return unless create_order_item(@order, cartItem.product_id, cartItem.quantity)
+
+        cartItem.destroy
       end
       redirect_to order_path(@order)
     else
@@ -55,15 +52,15 @@ class CartController < ApplicationController
 
   private
 
+  def product_not_in_cart?
+    CartItem.where(user_id: current_user.id, product_id: params[:product_id]).count.zero?
+  end
+
   def cart_params
-    params.permit(:product_id).merge!(user_id: current_user.id)
+    params.permit(:product_id).merge!(user_id: current_user.id, quantity: 1)
   end
 
   def update_quantity
     params.permit(:quantity)
-  end
-
-  def order_params
-    params.require(:order).permit(:mobile_number, :address, :pincode, :state, :payment)
   end
 end

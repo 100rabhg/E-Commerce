@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_user_have_store
+  before_action :inc_product, only: %i[edit update destroy]
 
   def new
     @product = Product.new
@@ -8,9 +9,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    param = product_params
-    param[:store_id] = current_user.store.id
-    @product = Product.new(param)
+    @product = Product.new(product_params.merge!(store_id: current_user.store.id))
     authorize! :manage, @product
     if @product.save
       redirect_to store_path
@@ -19,14 +18,9 @@ class ProductsController < ApplicationController
     end
   end
 
-  def edit
-    @product = current_user.store.product.find(params[:id])
-    authorize! :manage, @product
-  end
+  def edit; end
 
   def update
-    @product = current_user.store.product.find(params[:id])
-    authorize! :manage, @product
     if @product.update(product_params)
       redirect_to store_path
     else
@@ -35,13 +29,16 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    product = current_user.store.product.find(params[:id])
-    authorize! :manage, product
-    product.destroy
+    @product.destroy
     redirect_to store_path, status: :see_other
   end
 
   private
+
+  def inc_product
+    @product = Product.find(params[:id])
+    authorize! :manage, @product
+  end
 
   def product_params
     params.require(:product).permit(:title, :description, :price, :quantity, :category_id, :image)

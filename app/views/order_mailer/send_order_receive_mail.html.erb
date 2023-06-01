@@ -1,16 +1,8 @@
 <p><%=Date.today%></p>
-<p>
-</p>
-<%= %>
-<p>Dear <%=@user.name%>,</p>
+<p>Dear, <%=@user.name%></p>
 
 <p>Your store <%=@user.store.name%> receive a order <%=@item.product.title%> with quantity <%=@item.quantity%></p>
 
-<%
-=begin%>
- <p> <%= link_to "Click here to View Order detail", @item %> </p> 
-<%
-=end%>
 
 <h3>Regards,</h3>
 <h3>E-Commerce</h3>

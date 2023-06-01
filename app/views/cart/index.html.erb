@@ -1,49 +1,43 @@
 <table>
-<tr>
-<th><h2> Cart </h2></th>
-<th><h3> Welcome <%= current_user.email %> </h3></th>
-<th><%= button_to "Home", root_path, method: :get%> </th>
-<th><%= button_to "Your Order", orders_path, method: :get%> </th>
-</tr>
+  <tr>
+    <th><h2> Cart </h2></th>
+    <th><h3> Welcome <%= current_user.email %> </h3></th>
+    <th><%= button_to "Home", root_path, method: :get%> </th>
+    <th><%= button_to "Your Order", orders_path, method: :get%> </th>
+  </tr>
 </table>
 <%if @cartItems.empty?%>
-    <h2>Your cart is empty!!</h2>
+  <h2>Your cart is empty!!</h2>
 <%else%>
-
   <ul style="list-style-type:none;">
-  <% @cartItems.each do |item|%>
-    <li style="border: 1px solid black; padding: 20px; margin:10px;">
-    <table>
-    <tr>
-    <th rowspan="3"><%=image_tag item.product.image, size:"350"%></th>
-    <th><h3 style="display:inline; margin-right:50px;"><%=item.product.title%></h3></th>
-    <th><h4 style="display:inline"> Price: &#8377 <%=item.sub_total%> </h4></th>
-    </tr>
-    <tr>
-    <td>
-    <div style="display:inline;">
-    <table>
-    <tr>
-    <th>
-    <%= button_to "-", cart_path(item), params: {quantity:item.quantity-1}, method: :put%>
-    </th>
-    <th><h4> Quantity :<%=item.quantity%> </h4> </th>
-    <th>
-    <%= button_to "+", cart_path(item), params: {quantity:item.quantity+1}, method: :put%>
-    </th>
-    </table>
-    </div>
-    </td>
-    </tr>
-    <tr>
-    <td>
-    <%= button_to "Remove", cart_path(item), method: :delete%>
-    </td>
-    </tr>
-    </table>
-    </li>
-  <%end%>
-  <h4>Total Price: <%=@cartItems.pluck(:sub_total).inject(:+)%></h4>
-  <%= button_to "Buy now", new_order_path, params: {method: :cart}, method: :get%>
+    <% @cartItems.each do |cartItem|%>
+      <li style="border: 1px solid black; padding: 20px; margin:10px;">
+        <table>
+          <tr>
+            <th rowspan="3"><%=image_tag cartItem.product.image, size:"350"%></th>
+            <th><h3 style="display:inline; margin-right:50px;"><%=cartItem.product.title%></h3></th>
+             <th><h4 style="display:inline"> Price: &#8377 <%=cartItem.sub_total%> </h4></th>
+          </tr>
+          <tr>
+            <td>
+              <div style="display:inline;">
+                <table>
+                  <tr>
+                    <th><%= button_to "-", cart_path(cartItem), params: {quantity:cartItem.quantity-1}, method: :put%></th>
+                    <th><h4> Quantity :<%=cartItem.quantity%> </h4> </th>
+                    <th><%= button_to "+", cart_path(cartItem), params: {quantity:cartItem.quantity+1}, method: :put%></th>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><%= button_to "Remove", cart_path(cartItem), method: :delete%></td>
+          </tr>
+        </table>
+      </li>
+    <%end%>
+    <h4>Total Price: <%=@cartItems.pluck(:sub_total).inject(:+)%></h4>
+    <%= button_to "Buy now", new_order_path, params: {method: :cart}, method: :get%>
+  </ul>
 <%end%>
-</ul>
