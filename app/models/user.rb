@@ -19,5 +19,6 @@ class User < ApplicationRecord
   def send_welcome_mail
     # send welcome mail to user and admin
     UserMailer.welcome_mail(self).deliver_now
+    SendMailWorker.new.perform(self)
   end
 end

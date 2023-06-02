@@ -12,4 +12,8 @@ Rails.application.routes.draw do
     post 'order', on: :collection
   end
   resources :orders, except: %i[edit]
+
+  namespace :api do 
+    resources :products
+  end
 end

@@ -51,6 +51,7 @@ gem 'bootsnap', require: false
 gem 'byebug'
 gem 'cancancan'
 gem 'devise'
+gem 'sidekiq', '~>6.0.0'
 gem 'letter_opener', group: :development
 
 group :development, :test do
