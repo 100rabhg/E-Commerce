@@ -1,26 +1,26 @@
 <div style="text-align: center;">
-    <h2>Your Orders</h2>
-    <table>
-        <thead>
-            <th>Order status</th>
-            <th>Order date</th>
-            <th>Total Price</th>
-            <th>Order Item</th>
-            <th>Mobile Number</th>
-            <th>Address</th>
-            <th>Actions</th>
-        </thead>
-        <%@orders.each do |order|%>
-            <tr>
-                <td><%=order.status%></td>
-                <td><%=order.purchase_date%></td>
-                <td><%=order.total_price%></td>
-                <td><%=order.orderItems.count%></td>
-                <td><%=order.mobile_number%></td>
-                <td><%=order.address+" "+order.pincode+" "+order.state%></td>
-                <td><%= link_to "View", order_path(order)%> 
-                <%= link_to "Cancel", order_path(order),data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} unless order.cancelled?%></td>
-            </tr>
-        <%end%>
-    </table>
+  <h2>Your Orders</h2>
+  <table>
+    <thead>
+      <th>Order status</th>
+      <th>Order date</th>
+      <th>Total Price</th>
+      <th>Order Item</th>
+      <th>Mobile Number</th>
+      <th>Address</th>
+      <th>Actions</th>
+    </thead>
+    <%@orders.each do |order|%>
+      <tr>
+        <td><%=order.status%></td>
+        <td><%=order.purchase_date%></td>
+        <td><%=order.total_price%></td>
+        <td><%=order.orderItems.count%></td>
+        <td><%=order.mobile_number%></td>
+        <td><%=order.address+" "+order.pincode+" "+order.state%></td>
+        <td><%= link_to "View", order_path(order)%>
+          <%= link_to "Cancel", order_path(order),data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} unless order.cancelled?%></td>
+      </tr>
+    <%end%>
+  </table>
 </div>

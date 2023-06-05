@@ -50,9 +50,11 @@ gem 'bootsnap', require: false
 
 gem 'byebug'
 gem 'cancancan'
+gem 'city-state', github: 'thecodecrate/city-state'
 gem 'devise'
-gem 'sidekiq', '~>6.0.0'
+gem 'devise-api', github: 'nejdetkadir/devise-api', branch: 'main'
 gem 'letter_opener', group: :development
+gem 'sidekiq', '~>6.0.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -79,3 +81,7 @@ end
 
 gem 'activeadmin', '~> 2.13'
 gem 'sassc'
+
+gem "lockbox", "~> 1.2"
+
+gem "blind_index", "~> 2.3"

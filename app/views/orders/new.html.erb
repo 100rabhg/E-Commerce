@@ -3,54 +3,44 @@
   <h4><%=product.title%> </h4>
   <h3> Total Price :<%=product.price * @quantity%> </h3>
   <table>
-      <tr>
-
+    <tr>
       <th><%= button_to "-", new_order_path, params: {quantity:@quantity-1, product_id: @product_id}, method: :get%></th>
-
-      <th><h4> Quantity :<%=@quantity%> </h4></th>
-
+      <th>
+        <h4> Quantity :<%=@quantity%> </h4>
+      </th>
       <th><%= button_to "+", new_order_path, params: {quantity:@quantity+1, product_id: @product_id}, method: :get%></th>
-      </tr>
+    </tr>
   </table>
 <% end %>
-
 <h1> Delivery Address</h1>
 <% url = @method.nil? ? orders_path : order_cart_index_path %>
 <%= form_with model:@order, url:url do |form|%>
-
   <%if @method.nil?%>
     <%= form.hidden_field :product_id, value: @product_id%>
   <% else %>
     <%= form.hidden_field :method, value: :cart%>
   <% end %>
-
   <div>
     <%= form.label :Mobile_Number %><br>
     <%= form.telephone_field :mobile_number %>
   </div>
-
   <div>
     <%= form.label :Address %><br>
     <%= form.text_area :address %><br>
   </div>
-
   <div>
     <%= form.label :Pincode %><br>
     <%= form.text_area :pincode %><br>
   </div>
-
   <div>
     <%= form.label :state %><br>
-    <%= form.text_area :state %><br>
+    <%= form.select :state, CS.states(:IN).values %><br>
   </div>
-
   <div>
     <%= form.label :Payment_Method %><br>
     <%= form.select :payment, ['COD', 'card', 'upi']%><br>
   </div>
-
   <div>
     <%= form.submit "Pay Now"%>
   </div>
-
 <% end %>

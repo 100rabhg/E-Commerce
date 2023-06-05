@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(product_params.merge!(store_id: current_user.store.id))
+    @product = Product.new(product_params.merge!(store: current_user.store))
     authorize! :manage, @product
     if @product.save
       redirect_to store_path

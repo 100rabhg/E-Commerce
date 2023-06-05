@@ -1,26 +1,26 @@
 <div style="text-align: center;">
-    <h1>Your Order Detail</h1>
-    <h4>Your Order is:  <%=@order.status%></h4>
-    <h5>Date of Order:  <%=@order.purchase_date%></h5>
-    <h5>Total Price:    <%=@order.total_price%></h5>
+  <h1>Your Order Detail</h1>
+  <h4>Your Order is:  <%=@order.status%></h4>
+  <h5>Date of Order:  <%=@order.purchase_date%></h5>
+  <h5>Total Price:    <%=@order.total_price%></h5>
 </div>
 <h5 style="margin:30px">Item List:</h5>
 <table>
-    <thead>
-        <tr>
-            <th>Product Name</th>
-            <th>Price</th>
-            <th>Quantity </th>
-            <th>Sub Total</th>
-        </tr>
-    </thead>
-    <%@orderItems.each do |orderItem|%>
-        <tr>
-            <td><%=orderItem.product.title%></td>
-            <td><%=orderItem.product.price%></td>
-            <td><%=orderItem.quantity%></td>
-            <td><%=orderItem.sub_total%></td>
-        </tr>
-    <%end%>
+  <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Price</th>
+      <th>Quantity </th>
+      <th>Sub Total</th>
+    </tr>
+  </thead>
+  <%@orderItems.each do |orderItem|%>
+    <tr>
+      <td><%=orderItem.product.title%></td>
+      <td><%=orderItem.product.price%></td>
+      <td><%=orderItem.quantity%></td>
+      <td><%=orderItem.sub_total%></td>
+    </tr>
+  <%end%>
 </table>
 <%= button_to "Cancel", order_path(@order),data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} unless @order.cancelled?%>

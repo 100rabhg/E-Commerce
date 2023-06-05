@@ -6,7 +6,6 @@
       <div><%= message %></div>
     <% end %>
   </div>
-
   <div class="field">
     <%= form.label :description %><br>
     <%= form.text_area :description %><br>
@@ -14,7 +13,6 @@
       <div><%= message %></div>
     <% end %>
   </div>
-
   <div class="field" >
     <%= form.label :price %><br>
     <%= form.number_field :price %><br>
@@ -22,7 +20,6 @@
       <div><%= message %></div>
     <% end %>
   </div>
-
   <div class="field">
     <%= form.label :quantity %><br>
     <%= form.number_field :quantity %><br>
@@ -30,25 +27,21 @@
       <div><%= message %></div>
     <% end %>
   </div>
-
   <div class="field">
     <% if params[:action] == "new" %>
-     <%= form.select :category_id, Category.pluck(:title,:id) %><br>
+      <%= form.select :category_id, Category.pluck(:title,:id) %><br>
     <%else%>
-     <%= form.select :category_id, Category.pluck(:title,:id), selected: @product.category.id%><br>
+      <%= form.select :category_id, Category.pluck(:title,:id), selected: @product.category.id%><br>
     <%end%>
     <% @product.errors.full_messages_for(:category).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
-
   <div class="field">
     <%=form.label :image %>
     <%=form.file_field :image %>
   </div>
-
   <div>
     <%= form.submit %>
   </div>
-  
 <% end %>

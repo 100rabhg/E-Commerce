@@ -1,7 +1,11 @@
 <table>
   <tr>
-    <th><h2> Cart </h2></th>
-    <th><h3> Welcome <%= current_user.email %> </h3></th>
+    <th>
+      <h2> Cart </h2>
+    </th>
+    <th>
+      <h3> Welcome <%= current_user.email %> </h3>
+    </th>
     <th><%= button_to "Home", root_path, method: :get%> </th>
     <th><%= button_to "Your Order", orders_path, method: :get%> </th>
   </tr>
@@ -15,8 +19,12 @@
         <table>
           <tr>
             <th rowspan="3"><%=image_tag cartItem.product.image, size:"350"%></th>
-            <th><h3 style="display:inline; margin-right:50px;"><%=cartItem.product.title%></h3></th>
-             <th><h4 style="display:inline"> Price: &#8377 <%=cartItem.sub_total%> </h4></th>
+            <th>
+              <h3 style="display:inline; margin-right:50px;"><%=cartItem.product.title%></h3>
+            </th>
+            <th>
+              <h4 style="display:inline"> Price: &#8377 <%=cartItem.sub_total%> </h4>
+            </th>
           </tr>
           <tr>
             <td>
@@ -24,7 +32,9 @@
                 <table>
                   <tr>
                     <th><%= button_to "-", cart_path(cartItem), params: {quantity:cartItem.quantity-1}, method: :put%></th>
-                    <th><h4> Quantity :<%=cartItem.quantity%> </h4> </th>
+                    <th>
+                      <h4> Quantity :<%=cartItem.quantity%> </h4>
+                    </th>
                     <th><%= button_to "+", cart_path(cartItem), params: {quantity:cartItem.quantity+1}, method: :put%></th>
                   </tr>
                 </table>

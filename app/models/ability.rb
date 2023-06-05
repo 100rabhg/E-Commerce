@@ -5,12 +5,12 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
     user ||= User.new # guest user (not logged in)
-    if user.merchant?
+    if user.merchant? 
       can :manage, Store
       can :manage, Product
       can :read, OrderItem
       can :update, Order
-    elsif user.customer?
+    elsif user.customer? 
       can :manage, Order
       can :manage, CartItem
     end

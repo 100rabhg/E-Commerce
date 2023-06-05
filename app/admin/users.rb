@@ -31,7 +31,6 @@ ActiveAdmin.register User do
     column :sign_in_count
     column :last_sign_in_at
     column :confirmed_at
-    column :unconfirmed_email
     actions
   end
 

@@ -1,17 +1,17 @@
 <ul style="list-style-type:none;">
-<% products.each do |product|%>
-  <li style="border: 1px solid black; padding: 20px; margin:10px;">
-  <%= link_to(render("productview",product: product), home_path(product))%>
-  <table>
-  <tr>
-  <td>
-   <%= button_to "Add to Cart", cart_index_path, params: {product_id:product}, method: :post%>
- </td>
- <td>
- <%= button_to "Buy now", new_order_path, params: {product_id:product}, method: :get%>
-    </td>
-    </tr>
-    </table>
-  </li>
-<%end%>
+  <% products.each do |product|%>
+    <li style="border: 1px solid black; padding: 20px; margin:10px;">
+      <%= link_to(render("productview",product: product), home_path(product))%>
+      <table>
+        <tr>
+          <td>
+            <%= button_to "Add to Cart", cart_index_path, params: {product_id:product}, method: :post%>
+          </td>
+          <td>
+            <%= button_to "Buy now", new_order_path, params: {product_id:product}, method: :get%>
+          </td>
+        </tr>
+      </table>
+    </li>
+  <%end%>
 </ul>

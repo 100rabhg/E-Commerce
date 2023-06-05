@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
   resources :orders, except: %i[edit]
 
-  namespace :api do 
-    resources :products
+  namespace :api do
+    resources :products, except: %i[new edit]
   end
 end

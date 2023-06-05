@@ -1,2 +1,4 @@
-module Api::ProductsHelper
+module Api
+  module ProductsHelper
+  end
 end
