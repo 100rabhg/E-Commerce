@@ -10,7 +10,7 @@ class Ability
       can :manage, Product
       can :read, OrderItem
       can :update, Order
-    elsif user.customer? 
+    elsif user.customer?
       can :manage, Order
       can :manage, CartItem
     end

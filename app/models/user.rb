@@ -1,13 +1,11 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-
   encrypts :private_api_key
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, :trackable, :api
 
   validates :name, presence: true, length: { minimum: 3 }
+  validates :role, presence: true
   validates :private_api_key, uniqueness: true, allow_blank: true
 
   has_one :store, dependent: :destroy
@@ -17,18 +15,10 @@ class User < ApplicationRecord
   enum :role, %i[merchant customer]
 
   after_create :send_welcome_mail
-  before_create :set_private_api_key
 
   private
 
   def send_welcome_mail
-    # send welcome mail to user and admin
-    UserMailer.welcome_mail(self).deliver_now
-    SendMailWorker.new.perform(self)
+    WelcomeMailJob.set(wait_untill:Time.now+30.second).perform_later(self)
   end
-
-  def set_private_api_key
-    self.private_api_key = SecureRandom.hex if self.private_api_key.nil?
-  end
-
 end

@@ -1,7 +1,10 @@
 <table>
   <tr>
     <td rowspan="2">
-      <%=image_tag product.image , size:"200"%>
+      <%begin%>
+        <%=image_tag product.image, size:"200"%>
+        <% rescue => e %>
+      <% end %>
     </td>
     <td>
       <h3><%=product.title%></h3>
