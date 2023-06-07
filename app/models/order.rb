@@ -3,11 +3,12 @@ class Order < ApplicationRecord
   has_many :orderItems, dependent: :destroy
   has_many :products, through: :orderItems
 
-  validates :purchase_date, :payment, :address, presence: true
+  validates :purchase_date, :payment, :address, :status, presence: true
   validates :total_price, presence: true, numericality: { minmum: 1 }
   validates :pincode, presence: true, length: { is: 6 }
   validates :state, presence: true, length: { minimum: 2 }
-  validates :mobile_number, presence: true, length: { is: 10 }
+  validates :mobile_number, presence: true, length: { is: 10 },format: { with: /\A-?\d+\Z/,
+    message: "only allows number" }
 
   enum :status, %i[received packed shipped delivered cancelled]
   enum :payment, %i[COD card upi]

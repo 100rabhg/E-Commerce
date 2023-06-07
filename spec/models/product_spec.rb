@@ -24,13 +24,13 @@ RSpec.describe Product, type: :model do
     expect(subject.quantity.is_a? Integer).to eq(true)
   end
   it "is not valid if price is not number" do
-    expect(subject.quantity.is_a? Float).to eq(true)
+    expect(subject.price.is_a? Numeric).to eq(true)
   end
   it "title should be max 20" do
-    expect(subject.title.length).to <= 20
+    expect(subject.title.length).to be <= 20
   end
   it "description should be max 1000" do
-    expect(subject.title.length).to <= 1000
+    expect(subject.title.length).to be <= 1000
   end
 
 end
