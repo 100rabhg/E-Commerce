@@ -1,21 +1,24 @@
+require 'faker'
+
 FactoryBot.define do
   factory :user do
     sequence(:name) { |n| "Name#{n}" }
-    sequence(:email) { |n| "email#{n}@email.com" }
-    sequence(:password) { |n| "password" }
+    email { Faker::Internet.email}
+    password { "password" }
     trait :customer do
         role {:customer}
     end
     trait :merchant do
         role {:merchant}
     end
+    confirmed_at {Time.now}
   end
 end
 
 FactoryBot.define do
     factory :store do
       user
-      sequence(:name) { |n| "Name#{n}" }
+      name { Faker::Name.unique.name }
       sequence(:description) { |n| "Description#{n}" }
     end
 end
@@ -35,4 +38,18 @@ FactoryBot.define do
       sequence(:quantity) {|n| n}
       sequence(:price) {|n| n}
     end
+end
+
+FactoryBot.define do
+  factory :order do
+    user
+    total_price { Faker::Number.decimal }
+    purchase_date {Date.today}
+    status {:received}
+    sequence(:address) { |n| "Address#{n}" }
+    mobile_number { Faker::Number.number(digits: 10) }
+    pincode { Faker::Number.number(digits: 6) }
+    state { Faker::String.random(length: 4) }
+    payment { :COD }
+  end
 end

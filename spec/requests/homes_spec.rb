@@ -9,7 +9,7 @@ RSpec.describe "Homes", type: :request do
       end
     end
   end
-
+  
   describe "GET search" do
     context "visit search page" do
       it "return a successful responce" do
