@@ -54,7 +54,7 @@ gem 'city-state', github: 'thecodecrate/city-state'
 gem 'devise'
 gem 'devise-api', github: 'nejdetkadir/devise-api', branch: 'main'
 gem 'letter_opener', group: :development
-gem 'sidekiq','~> 6.0.2'
+gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem "launchy"
 
@@ -62,6 +62,7 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'rspec-rails' 
+  gem 'factory_bot_rails'
 end
 
 group :development do

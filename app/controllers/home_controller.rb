@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
-  def index
-    return redirect_to store_path if !current_user.nil? && current_user.merchant?
+  before_action :if_merchant_redirected_store
 
+  def index
     @products = Product.where(quantity: (1..)).order(updated_at: :desc).limit(20)
   end
 
@@ -13,7 +13,8 @@ class HomeController < ApplicationController
                                          sanitize_query).or(Product.where('description LIKE ?', sanitize_query)))
   end
 
-  def show
-    @product = Product.find_by(id: params[:id])
+  def if_merchant_redirected_store
+    redirect_to store_path if !current_user.nil? && current_user.merchant?
   end
+
 end

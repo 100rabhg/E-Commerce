@@ -19,6 +19,6 @@ class User < ApplicationRecord
   private
 
   def send_welcome_mail
-    WelcomeMailJob.set(wait_untill:Time.now+30.second).perform_later(self)
+    WelcomeMailJob.set(wait_until:Date.tomorrow.noon).perform_later(self)
   end
 end

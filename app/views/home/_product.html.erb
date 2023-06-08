@@ -1,7 +1,7 @@
 <ul style="list-style-type:none;">
   <% products.each do |product|%>
     <li style="border: 1px solid black; padding: 20px; margin:10px;">
-      <%= link_to(render("productview",product: product), home_path(product))%>
+      <%= link_to(render("productview",product: product), product)%>
       <table>
         <tr>
           <td>
