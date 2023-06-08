@@ -14,7 +14,7 @@ end
 
 FactoryBot.define do
     factory :store do
-      usera
+      user
       sequence(:name) { |n| "Name#{n}" }
       sequence(:description) { |n| "Description#{n}" }
     end
