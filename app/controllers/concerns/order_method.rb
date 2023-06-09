@@ -17,6 +17,7 @@ module OrderMethod
     true
   end
 
+  private
   def order_params(params)
     params.require(:order).permit(:mobile_number, :address, :pincode, :state, :payment).merge(
       total_price: @total_sum, user: current_user

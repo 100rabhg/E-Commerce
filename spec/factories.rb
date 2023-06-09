@@ -53,3 +53,12 @@ FactoryBot.define do
     payment { :COD }
   end
 end
+
+FactoryBot.define do
+  factory :cartItem do
+    user
+    product
+    quantity { Faker::Number.number }
+    sub_total {Faker::Number.decimal}
+  end
+end

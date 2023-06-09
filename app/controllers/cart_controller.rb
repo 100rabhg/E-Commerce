@@ -4,7 +4,6 @@ class CartController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # byebug
     @cartItems = current_user.cartItems
     return unless @cartItems.instance_of?(CartItem)
 
