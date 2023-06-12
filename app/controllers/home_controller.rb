@@ -16,5 +16,4 @@ class HomeController < ApplicationController
   def if_merchant_redirected_store
     redirect_to store_path if !current_user.nil? && current_user.merchant?
   end
-
 end

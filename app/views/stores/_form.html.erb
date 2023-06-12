@@ -2,13 +2,17 @@
   <div>
     <%= form.label :name %><br>
     <%= form.text_field :name %>
+    <% store.errors.full_messages_for(:name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
   </div>
-
   <div>
     <%= form.label :description %><br>
     <%= form.text_area :description %><br>
+    <% store.errors.full_messages_for(:description).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
   </div>
-
   <div>
     <%= form.submit %>
   </div>

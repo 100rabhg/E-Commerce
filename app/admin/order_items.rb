@@ -1,10 +1,15 @@
 ActiveAdmin.register OrderItem do
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  permit_params :quantity, :sub_total, :order_id, :product_id
+  
+  permit_params :quantity, :order_id, :product_id
+  # config.clear_action_items!
+  form do |f|
+    f.inputs do
+      f.input :order, collection: Order.all.map { |t| [t.id] }
+      f.input :product
+      f.input :quantity
+    end
+    f.actions
+  end
   #
   # or
   #

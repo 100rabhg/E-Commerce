@@ -17,28 +17,44 @@
 <%= form_with model:@order, url:url do |form|%>
   <%if @method.nil?%>
     <%= form.hidden_field :product_id, value: @product_id%>
+    <%= form.hidden_field :quantity, value: @quantity%>
   <% else %>
     <%= form.hidden_field :method, value: :cart%>
   <% end %>
   <div>
-    <%= form.label :Mobile_Number %><br>
+    <%= form.label :mobile_Number %><br>
     <%= form.telephone_field :mobile_number %>
+    <% @order.errors.full_messages_for(:mobile_number).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
   </div>
   <div>
     <%= form.label :Address %><br>
     <%= form.text_area :address %><br>
+    <% @order.errors.full_messages_for(:address).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
   </div>
   <div>
     <%= form.label :Pincode %><br>
     <%= form.text_area :pincode %><br>
+    <% @order.errors.full_messages_for(:pincode).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
   </div>
   <div>
     <%= form.label :state %><br>
     <%= form.select :state, CS.states(:IN).values %><br>
+    <% @order.errors.full_messages_for(:state).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
   </div>
   <div>
     <%= form.label :Payment_Method %><br>
     <%= form.select :payment, ['COD', 'card', 'upi']%><br>
+    <% @order.errors.full_messages_for(:payment).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
   </div>
   <div>
     <%= form.submit "Pay Now"%>

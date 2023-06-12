@@ -9,7 +9,7 @@ module OrderMethod
   def create_order_item(order, product_id, quantity)
     orderitem = OrderItem.new(product_id:, order:, quantity:)
     unless orderitem.save
-      order.destory
+      order.destroy
       redirect_to root_path, status: :unprocessable_entity
       return false
     end
@@ -18,6 +18,7 @@ module OrderMethod
   end
 
   private
+
   def order_params(params)
     params.require(:order).permit(:mobile_number, :address, :pincode, :state, :payment).merge(
       total_price: @total_sum, user: current_user

@@ -5,11 +5,11 @@ class Order < ApplicationRecord
 
   validates :purchase_date, :payment, :address, :status, presence: true
   validates :total_price, presence: true, numericality: { minmum: 1 }
-  validates :pincode, presence: true, length: { is: 6 }
+  validates :pincode, presence: true, length: { is: 6 }, format: { with: /\A-?\d+\Z/,
+                                                                   message: 'only allows number' }
   validates :state, presence: true, length: { minimum: 2 }
-  validates :mobile_number, presence: true, length: { is: 10 },format: { with: /\A-?\d+\Z/,
-    message: "only allows number" }
-
+  validates :mobile_number, presence: true, length: { is: 10 }, format: { with: /\A-?\d+\Z/,
+                                                                          message: 'only allows number' }
   enum :status, %i[received packed shipped delivered cancelled]
   enum :payment, %i[COD card upi]
 

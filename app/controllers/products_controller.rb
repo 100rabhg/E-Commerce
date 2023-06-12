@@ -1,10 +1,11 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: :show
-  before_action :ensure_user_have_store,  except: :show
+  before_action :ensure_user_have_store, except: :show
   before_action :inc_product, only: %i[edit update destroy]
- 
+
   def show
     return redirect_to store_path if !current_user.nil? && current_user.merchant?
+
     @product = Product.find_by(id: params[:id])
   end
 

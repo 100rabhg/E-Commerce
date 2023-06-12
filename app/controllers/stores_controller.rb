@@ -1,7 +1,7 @@
 class StoresController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_user_have_not_store, only: %i[new create]
-  before_action :ensure_user_have_store, only: %i[destory edit update show]
+  before_action :ensure_user_have_store, only: %i[destroy edit update show]
   before_action :inc_store, only: %i[show edit update]
 
   def new

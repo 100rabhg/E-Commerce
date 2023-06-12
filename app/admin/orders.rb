@@ -4,7 +4,20 @@ ActiveAdmin.register Order do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :status
+  permit_params :status, :user_id, :total_price, :address, :pincode, :state, :payment
+  # config.clear_action_items!
+
+  form do |f|
+    f.inputs do
+      f.input :user
+      f.input :total_price
+      f.input :address
+      f.input :pincode
+      f.input :state, collection: CS.states(:IN).values
+      f.input :payment
+    end
+    f.actions
+  end
   #
   # or
   #

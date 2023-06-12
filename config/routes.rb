@@ -9,16 +9,14 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   resources :home, only: :index
   get '/search', to: 'home#search'
-  resource :store, except: %i[destory]
+  resource :store, except: %i[destroy]
   resources :products, except: %i[index]
   resources :cart, except: %i[show new edit] do
     post 'order', on: :collection
   end
   resources :orders, except: %i[edit]
-  
+
   namespace :api do
     resources :products, except: %i[new edit]
   end
-
-
 end

@@ -28,7 +28,7 @@ gem 'stimulus-rails'
 gem 'jbuilder'
 
 # Use Redis adapter to run Action Cable in production
-gem "redis"
+gem 'redis'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -53,16 +53,16 @@ gem 'cancancan'
 gem 'city-state', github: 'thecodecrate/city-state'
 gem 'devise'
 gem 'devise-api', github: 'nejdetkadir/devise-api', branch: 'main'
+gem 'launchy'
 gem 'letter_opener', group: :development
 gem 'sidekiq'
-gem 'sinatra', '>= 1.3.0', :require => nil
-gem "launchy"
+gem 'sinatra', '>= 1.3.0', require: nil
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
-  gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -86,7 +86,7 @@ end
 gem 'activeadmin', '~> 2.13'
 gem 'sassc'
 
-gem "lockbox", "~> 1.2"
+gem 'lockbox', '~> 1.2'
 
-gem "blind_index", "~> 2.3"
+gem 'blind_index', '~> 2.3'
 gem 'faker'

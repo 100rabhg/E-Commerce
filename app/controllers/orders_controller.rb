@@ -36,13 +36,15 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @total_sum = Product.find(params[:order][:product_id]).price * params[:order][:quantity].to_i
+    @product_id = params[:order][:product_id]
+    @quantity = params[:order][:quantity].to_i
+    @total_sum = Product.find(@product_id).price * @quantity
     order_now(params)
-    if @order.save!
-      create_order_item(@order, params[:order][:product_id], params[:order][:quantity].to_i)
+    if @order.save
+      create_order_item(@order, @product_id, @quantity)
       redirect_to order_path(@order)
     else
-      redirect_to root_path, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
