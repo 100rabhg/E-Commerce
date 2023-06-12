@@ -41,7 +41,6 @@ RSpec.describe "Carts", type: :request do
     end
   end
 
-
   describe "put update" do
     context "if user is login" do
       before(:each) do
@@ -66,7 +65,7 @@ RSpec.describe "Carts", type: :request do
   end
 
 
-  describe "post create" do
+  describe "delete destroy" do
     context "if user is login" do
       before(:each) do
         @user = FactoryBot.create(:user, :customer)
@@ -76,7 +75,8 @@ RSpec.describe "Carts", type: :request do
         category = FactoryBot.create(:category)
         store = FactoryBot.create(:store, user: @user)
         product = FactoryBot.create(:product, category: category, store: store)
-        cartItem = FactoryBot.create(:cartItem, product: product, user: @user)
+        cartItem = FactoryBot.create(:cartItem,
+        product: product, user: @user)
         expect {delete cart_path(cartItem)}.to change(CartItem, :count)
       end
     end
