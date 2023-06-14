@@ -1,7 +1,7 @@
 ActiveAdmin.register OrderItem do
   
   permit_params :quantity, :order_id, :product_id
-  # config.clear_action_items!
+  config.clear_action_items!
   form do |f|
     f.inputs do
       f.input :order, collection: Order.all.map { |t| [t.id] }
