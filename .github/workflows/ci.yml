@@ -16,7 +16,6 @@ jobs:
 
       - name: Set up Ruby
         run: |
-          cd
           git clone https://github.com/rbenv/rbenv.git ~/.rbenv
           echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
           echo 'eval "$(rbenv init -)"' >> ~/.bashrc
@@ -42,7 +41,7 @@ jobs:
         uses: actions/checkout@v2
       - name: gem install 
         run: |
-          cd E-Commerce
+          ls 
           bundle install
 
       - name: Set up SQLite database
