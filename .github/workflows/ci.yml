@@ -41,7 +41,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: gem install 
-        run: bundle install
+        run: |
+          cd E-Commerce
+          bundle install
 
       - name: Set up SQLite database
         run: bundle exec rails db:migrate
