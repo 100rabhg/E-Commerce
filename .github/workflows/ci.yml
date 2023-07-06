@@ -30,8 +30,6 @@ jobs:
       - name: install sqlite3
         run: sudo apt install sqlite3
 
-      - name: install rails
-        run: gem install rails
 
   test:
     needs: setup
