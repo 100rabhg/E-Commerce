@@ -36,8 +36,8 @@ jobs:
       run: |
         bundle install
 
-      - name: Set up SQLite database
-        run: bundle exec rails db:migrate
+    - name: Set up SQLite database
+      run: bundle exec rails db:migrate
 
-      - name: Run tests
-        run: bundle exec rspec
+    - name: Run tests
+      run: bundle exec rspec
