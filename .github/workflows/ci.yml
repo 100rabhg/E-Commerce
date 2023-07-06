@@ -15,27 +15,27 @@ jobs:
         image: redis
     steps:
     - name: Checkout code
-        uses: actions/checkout@v2
+      uses: actions/checkout@v2
 
-      - name: Set up Ruby
-        run: |
-          git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-          echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-          echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-          exec $SHELL
-          git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-          echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
-          exec $SHELL
-          git clone https://github.com/rbenv/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
-          rbenv install 3.2.2
-          rbenv global 3.2.2
+    - name: Set up Ruby
+      run: |
+        git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+        echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+        echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+        exec $SHELL
+        git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+        echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+        exec $SHELL
+        git clone https://github.com/rbenv/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
+        rbenv install 3.2.2
+        rbenv global 3.2.2
 
-      - name: install sqlite3
-        run: sudo apt install sqlite3
+    - name: install sqlite3
+      run: sudo apt install sqlite3
 
-      - name: gem install 
-        run: |
-          bundle install
+    - name: gem install 
+      run: |
+        bundle install
 
       - name: Set up SQLite database
         run: bundle exec rails db:migrate
