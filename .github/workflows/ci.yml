@@ -27,11 +27,11 @@ jobs:
           git clone https://github.com/rbenv/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
           rbenv install 3.2.2
           rbenv global 3.2.2
+      - name: install sqlite3
+        run: sudo apt install sqlite3
 
-      - name: Install dependencies
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3
+      - name: install rails
+        run: gem install rails
 
   test:
     needs: setup
@@ -42,18 +42,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Set up Ruby
-        uses: actions/setup-ruby@v1
-
-      - name: Install dependencies
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3
+      - name: gem install 
+        run: bundle
 
       - name: Set up SQLite database
-        run: |
-          bundle exec rails db:migrate
+        run: rails db:migrate
 
       - name: Run tests
-        run: bundle exec rspec
+        run: rspec
