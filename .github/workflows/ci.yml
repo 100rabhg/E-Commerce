@@ -42,7 +42,6 @@ jobs:
 
       - name: Set up SQLite database
         run: |
-          cp config/database.ci.yml config/database.yml
           bundle exec rails db:migrate
 
       - name: Run tests
