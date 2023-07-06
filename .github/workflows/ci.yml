@@ -8,10 +8,13 @@ on:
     branches:
       - master
 jobs:
-  setup:
+  test:
     runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis
     steps:
-      - name: Checkout code
+    - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Set up Ruby
@@ -26,22 +29,12 @@ jobs:
           git clone https://github.com/rbenv/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
           rbenv install 3.2.2
           rbenv global 3.2.2
+
       - name: install sqlite3
         run: sudo apt install sqlite3
 
-
-  test:
-    needs: setup
-    runs-on: ubuntu-latest
-    services:
-      redis:
-        image: redis
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
       - name: gem install 
         run: |
-          ls 
           bundle install
 
       - name: Set up SQLite database
