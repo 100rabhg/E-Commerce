@@ -1,4 +1,5 @@
 name: CI
+
 on:
   push:
     branches:
@@ -6,6 +7,7 @@ on:
   pull_request:
     branches:
       - master
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -18,6 +20,8 @@ jobs:
 
     - name: Set up Ruby
       run: |
+        sudo apt-get update
+        sudo apt-get install -y libssl-dev libreadline-dev zlib1g-dev
         git clone https://github.com/rbenv/rbenv.git ~/.rbenv
         echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
         echo 'eval "$(rbenv init -)"' >> ~/.bashrc
@@ -26,18 +30,18 @@ jobs:
         echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
         exec $SHELL
         git clone https://github.com/rbenv/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
-        rbenv install 3.2.2
-        rbenv global 3.2.2
+        rbenv install 3.0.2
+        rbenv global 3.0.2
 
-    - name: install sqlite3
-      run: sudo apt install sqlite3
-
-    - name: gem install 
+    - name: Install dependencies
       run: |
-        bundle install
+        bundle config set --local without 'development:test'
+        bundle install --jobs 4 --retry 3
 
     - name: Set up SQLite database
-      run: bundle exec rails db:migrate
+      run: |
+        cp config/database.ci.yml config/database.yml
+        bundle exec rails db:migrate
 
     - name: Run tests
       run: bundle exec rspec
