@@ -33,6 +33,13 @@ jobs:
         rbenv install 3.0.2
         rbenv global 3.0.2
 
+    - name: Install rails
+      run: gem install rails
+
+      run: |
+        bundle config set --local without 'development:test'
+        bundle install --jobs 4 --retry 3
+
     - name: Install dependencies
       run: |
         bundle config set --local without 'development:test'
