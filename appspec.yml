@@ -5,7 +5,7 @@ files:
 destination: /var/www/my-app/
 permissions:
 - object: /var/www/my-app/
-pattern: “**”
+pattern: "**"
 owner: ubuntu
 group: ubuntu
 mode: 775
